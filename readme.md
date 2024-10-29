@@ -26,7 +26,7 @@ ShopAssistAI follows a client-server architecture. Users interact with the web i
 
 
 
-## 6. Implementation:
+## Implementation:
 
 The Flask application utilizes various functionalities:
 
