@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Laptop Shopassist</title>
+    <style>
+        /* Styles for the app */
+        body {
+            background-color: #f7f7f7;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .outercontainer {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+        }
+
+        .title {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .conversationcontainer {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            height: 400px;
+            overflow-y: scroll;
+        }
+
+        .user, .bot {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .user {
+            background-color: #e0f2ff;
+            color: #333;
+        }
+
+        .bot {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        .inputcontainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .inputtextbox {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .sendbutton {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .endbutton {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="outercontainer">
+        <div class="header">
+            <h1 class="title">Laptop Shopassist</h1>
+        </div>
+        <div class="conversationcontainer" id="chatcontainer">
+            {% for entry in name_xyz %}
+            <div class="{% if entry.bot %}bot{% else %}user{% endif %}">
+                {% if entry.bot %}
+                {{ entry.bot }}
+                {% else %}
+                {{ entry.user }}
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="inputcontainer">
+            <form action="/conversation" method="POST" class="inputform">
+                <input type="text" name="user_input_message" class="inputtextbox" placeholder="Ask me anything about laptops!">
+                <button type="submit" class="sendbutton">Send</button>
+            </form>
+            <form action="/end_conversation" method="POST" class="endform">
+                <button type="submit" class="endbutton">End Conversation</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function scrollToBottom() {
+            var chatContainer = document.getElementById('chatcontainer');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+        window.onload = scrollToBottom;
+    </script>
+</body>
+</html>
