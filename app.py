@@ -1,4 +1,6 @@
 from flask import Flask, redirect, url_for, render_template, request
+from pyngrok import ngrok
+ 
 from functions import (
     initialize_conversation,
     initialize_conv_reco,
@@ -112,5 +114,7 @@ def invite():
         conversation_bot.append({'bot':response_asst_reco})
     return redirect(url_for('default_func'))
 
-if __name__ == '__main__':
-    app.run(debug=True, host= "0.0.0.0", port=5001)
+if __name__ == "__main__":
+    public_url = ngrok.connect(5001)
+    print("ngrok tunnel:", public_url)
+    app.run(port=5001)
